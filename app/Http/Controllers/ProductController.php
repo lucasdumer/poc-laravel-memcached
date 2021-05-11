@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Requests\ProductCreateRequest;
+use App\Requests\ProductFindRequest;
+use App\Requests\ProductListRequest;
 use App\Services\ProductService;
 
 class ProductController extends Controller
@@ -24,25 +26,25 @@ class ProductController extends Controller
         }
     }
 
-    // public function find(AuthorFindRequest $request)
-    // {
-    //     try {
-    //         $author = $this->authorService->find($request);
-    //         return $this->success($author);
-    //     } catch(\Exception $e) {
-    //         return $this->error($e);
-    //     }
-    // }
+    public function find(ProductFindRequest $request)
+    {
+        try {
+            $product = $this->productService->find($request);
+            return $this->success($product);
+        } catch(\Exception $e) {
+            return $this->error($e);
+        }
+    }
 
-    // public function list(AuthorListRequest $request)
-    // {
-    //     try {
-    //         $authors = $this->authorService->list($request);
-    //         return $this->success($authors);
-    //     } catch(\Exception $e) {
-    //         return $this->error($e);
-    //     }
-    // }
+    public function list(ProductListRequest $request)
+    {
+        try {
+            $products = $this->productService->list($request);
+            return $this->success($products);
+        } catch(\Exception $e) {
+            return $this->error($e);
+        }
+    }
 
     // public function delete(AuthorDeleteRequest $request)
     // {

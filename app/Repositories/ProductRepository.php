@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Requests\ProductCreateRequest;
+use App\Requests\ProductListRequest;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 
@@ -21,31 +22,28 @@ class ProductRepository
         }
     }
 
-    // public function find(int $id): ?Book
-    // {
-    //     try {
-    //         $book = Book::find($id);
-    //         return $book;
-    //     } catch(\Exception $e) {
-    //         throw new \Exception("Database error on find book. ".$e->getMessage());
-    //     }
-    // }
+    public function find(int $id): ?Product
+    {
+        try {
+            $product = Product::find($id);
+            return $product;
+        } catch(\Exception $e) {
+            throw new \Exception("Database error on find product. ".$e->getMessage());
+        }
+    }
 
-    // public function list(BookListRequest $request)
-    // {
-    //     try {
-    //         $book = DB::table('book');
-    //         if (!empty($request->name)) {
-    //             $book->where('name', 'like', '%'.$request->name.'%');
-    //         }
-    //         if (!empty($request->authorId)) {
-    //             $book->where('author_id', '=', $request->authorId);
-    //         }
-    //         return $book->get();
-    //     } catch(\Exception $e) {
-    //         throw new \Exception("Database error on list book. ".$e->getMessage());
-    //     }
-    // }
+    public function list(ProductListRequest $request)
+    {
+        try {
+            $product = DB::table('product');
+            if (!empty($request->name)) {
+                $product->where('name', 'like', '%'.$request->name.'%');
+            }
+            return $product->get();
+        } catch(\Exception $e) {
+            throw new \Exception("Database error on list product. ".$e->getMessage());
+        }
+    }
 
     // public function delete(int $id): void
     // {
