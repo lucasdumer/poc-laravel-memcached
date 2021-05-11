@@ -69,7 +69,7 @@ class Handler extends ExceptionHandler
                 'status'=> 'error', 
                 'message' => $exception->getMessage(), 
                 'data' => null
-            ], 404);
+            ], 500);
         }
         if ($exception instanceof NotFoundHttpException) {
             return response()->json([
