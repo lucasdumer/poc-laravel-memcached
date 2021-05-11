@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Requests\ProductCreateRequest;
 use App\Requests\ProductFindRequest;
 use App\Requests\ProductListRequest;
+use App\Requests\ProductDeleteRequest;
 use App\Repositories\ProductRepository;
 use App\Models\Product;
 
@@ -45,13 +46,12 @@ class ProductService
         }
     }
 
-    // public function delete(BookDeleteRequest $request): void
-    // {
-    //     try {
-    //         $this->bookRepository->delete((int) $request->id);
-    //         $this->redisService->clear('books');
-    //     } catch(\Exception $e) {
-    //         throw new \Exception("Error on delete book. ".$e->getMessage());
-    //     }
-    // }
+    public function delete(ProductDeleteRequest $request): void
+    {
+        try {
+            $this->productRepository->delete((int) $request->id);
+        } catch(\Exception $e) {
+            throw new \Exception("Error on delete product. ".$e->getMessage());
+        }
+    }
 }

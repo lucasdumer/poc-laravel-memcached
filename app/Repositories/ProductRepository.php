@@ -45,16 +45,16 @@ class ProductRepository
         }
     }
 
-    // public function delete(int $id): void
-    // {
-    //     try {
-    //         $book = Book::find($id);
-    //         if (empty($book)) {
-    //             throw new \Exception("No find with id.");
-    //         }
-    //         $book->delete();
-    //     } catch(\Exception $e) {
-    //         throw new \Exception("Database error on delete book. ".$e->getMessage());
-    //     }
-    // }
+    public function delete(int $id): void
+    {
+        try {
+            $product = Product::find($id);
+            if (empty($product)) {
+                throw new \Exception("No find with id.");
+            }
+            $product->delete();
+        } catch(\Exception $e) {
+            throw new \Exception("Database error on delete product. ".$e->getMessage());
+        }
+    }
 }

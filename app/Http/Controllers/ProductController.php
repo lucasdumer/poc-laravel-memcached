@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Requests\ProductCreateRequest;
 use App\Requests\ProductFindRequest;
 use App\Requests\ProductListRequest;
+use App\Requests\ProductDeleteRequest;
 use App\Services\ProductService;
 
 class ProductController extends Controller
@@ -46,13 +47,13 @@ class ProductController extends Controller
         }
     }
 
-    // public function delete(AuthorDeleteRequest $request)
-    // {
-    //     try {
-    //         $this->authorService->delete($request);
-    //         return $this->success();
-    //     } catch(\Exception $e) {
-    //         return $this->error($e);
-    //     }
-    // }
+    public function delete(ProductDeleteRequest $request)
+    {
+        try {
+            $this->productService->delete($request);
+            return $this->success();
+        } catch(\Exception $e) {
+            return $this->error($e);
+        }
+    }
 }
