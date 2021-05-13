@@ -6,6 +6,7 @@ use App\Requests\ProductCreateRequest;
 use App\Requests\ProductFindRequest;
 use App\Requests\ProductListRequest;
 use App\Requests\ProductDeleteRequest;
+use App\Requests\ProductUpdateRequest;
 use App\Services\ProductService;
 
 class ProductController extends Controller
@@ -52,6 +53,16 @@ class ProductController extends Controller
         try {
             $this->productService->delete($request);
             return $this->success();
+        } catch(\Exception $e) {
+            return $this->error($e);
+        }
+    }
+
+    public function update(ProductUpdateRequest $request)
+    {
+        try {
+            $product = $this->productService->update($request);
+            return $this->success($product);
         } catch(\Exception $e) {
             return $this->error($e);
         }

@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Requests\ProductCreateRequest;
 use App\Requests\ProductListRequest;
+use App\Requests\ProductUpdateRequest;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 
@@ -55,6 +56,22 @@ class ProductRepository
             $product->delete();
         } catch(\Exception $e) {
             throw new \Exception("Database error on delete product. ".$e->getMessage());
+        }
+    }
+    
+    public function update(ProductUpdateRequest $request): Product
+    {
+        try {
+            $product = Product::find($request->id);
+            if (empty($product)) {
+                throw new \Exception("No find with id.");
+            }
+            $product->name = $request->name;
+            $product->price = $request->price;
+            $product->save();
+            return $product;
+        } catch(\Exception $e) {
+            throw new \Exception("Database error on update product. ".$e->getMessage());
         }
     }
 }

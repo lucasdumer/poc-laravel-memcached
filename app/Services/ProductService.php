@@ -6,6 +6,7 @@ use App\Requests\ProductCreateRequest;
 use App\Requests\ProductFindRequest;
 use App\Requests\ProductListRequest;
 use App\Requests\ProductDeleteRequest;
+use App\Requests\ProductUpdateRequest;
 use App\Repositories\ProductRepository;
 use App\Models\Product;
 use App\Services\CacheService;
@@ -63,4 +64,16 @@ class ProductService
             throw new \Exception("Error on delete product. ".$e->getMessage());
         }
     }
+
+    public function update(ProductUpdateRequest $request): Product
+    {
+        try {
+            $product = $this->productRepository->update($request);
+            $this->cacheService->clear('products');
+            return $product;
+        } catch(\Exception $e) {
+            throw new \Exception("Error on update product. ".$e->getMessage());
+        }
+    }
+
 }
