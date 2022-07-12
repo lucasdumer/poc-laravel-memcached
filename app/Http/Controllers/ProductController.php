@@ -11,60 +11,31 @@ use App\Services\ProductService;
 
 class ProductController extends Controller
 {
-    private $productService;
-
-    public function __construct(ProductService $productService)
-    {
-        $this->productService = $productService;
-    }
+    public function __construct(private ProductService $productService) {}
 
     public function create(ProductCreateRequest $request)
     {
-        try {
-            $author = $this->productService->create($request);
-            return $this->success($author);
-        } catch(\Exception $e) {
-            return $this->error($e);
-        }
+        return $this->success($this->productService->create($request));
     }
 
     public function find(ProductFindRequest $request)
     {
-        try {
-            $product = $this->productService->find($request);
-            return $this->success($product);
-        } catch(\Exception $e) {
-            return $this->error($e);
-        }
+        return $this->success($this->productService->find($request));
     }
 
     public function list(ProductListRequest $request)
     {
-        try {
-            $products = $this->productService->list($request);
-            return $this->success($products);
-        } catch(\Exception $e) {
-            return $this->error($e);
-        }
+        return $this->success($this->productService->list($request));
     }
 
     public function delete(ProductDeleteRequest $request)
     {
-        try {
-            $this->productService->delete($request);
-            return $this->success();
-        } catch(\Exception $e) {
-            return $this->error($e);
-        }
+        $this->productService->delete($request);
+        return $this->success();
     }
 
     public function update(ProductUpdateRequest $request)
     {
-        try {
-            $product = $this->productService->update($request);
-            return $this->success($product);
-        } catch(\Exception $e) {
-            return $this->error($e);
-        }
+        return $this->success($this->productService->update($request));
     }
 }
